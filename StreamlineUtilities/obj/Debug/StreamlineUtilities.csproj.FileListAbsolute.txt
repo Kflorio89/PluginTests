@@ -1,0 +1,10 @@
+C:\Users\kflor\source\repos\PluginTester\StreamlineUtilities\bin\Debug\StreamlineUtilities.dll
+C:\Users\kflor\source\repos\PluginTester\StreamlineUtilities\bin\Debug\StreamlineUtilities.pdb
+C:\Users\kflor\source\repos\PluginTester\StreamlineUtilities\bin\Debug\TDI.Streamline.Utilities.Networking.dll
+C:\Users\kflor\source\repos\PluginTester\StreamlineUtilities\bin\Debug\TDI.Streamline.Utilities.Publishing.dll
+C:\Users\kflor\source\repos\PluginTester\StreamlineUtilities\bin\Debug\TDI.Streamline.Utilities.SecureXml.dll
+C:\Users\kflor\source\repos\PluginTester\StreamlineUtilities\obj\Debug\StreamlineUtilities.csproj.CoreCompileInputs.cache
+C:\Users\kflor\source\repos\PluginTester\StreamlineUtilities\obj\Debug\StreamlineUtilities.csproj.CopyComplete
+C:\Users\kflor\source\repos\PluginTester\StreamlineUtilities\obj\Debug\StreamlineUtilities.dll
+C:\Users\kflor\source\repos\PluginTester\StreamlineUtilities\obj\Debug\StreamlineUtilities.pdb
+C:\Users\kflor\source\repos\PluginTester\StreamlineUtilities\obj\Debug\StreamlineUtilities.csproj.AssemblyReference.cache

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32428.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginTester", "PluginTester\PluginTester.csproj", "{9B6A73F4-202D-4262-B561-2CD079E57529}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamlinePlugin", "StreamlineUtilities\StreamlinePlugin.csproj", "{2FEDE12A-9444-4AC3-925F-29FBB2A893A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B6A73F4-202D-4262-B561-2CD079E57529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B6A73F4-202D-4262-B561-2CD079E57529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B6A73F4-202D-4262-B561-2CD079E57529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B6A73F4-202D-4262-B561-2CD079E57529}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FEDE12A-9444-4AC3-925F-29FBB2A893A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FEDE12A-9444-4AC3-925F-29FBB2A893A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FEDE12A-9444-4AC3-925F-29FBB2A893A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FEDE12A-9444-4AC3-925F-29FBB2A893A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D602E3A-F036-4E89-85CF-DFB37AACF0EE}
+	EndGlobalSection
+EndGlobal

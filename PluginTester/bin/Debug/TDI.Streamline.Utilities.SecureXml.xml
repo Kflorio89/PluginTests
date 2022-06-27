@@ -1,0 +1,496 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TDI.Streamline.Utilities.SecureXml</name>
+    </assembly>
+    <members>
+        <member name="T:TDI.Streamline.Utilities.SecureXml.ValueEditor">
+            \brief Manages encrypted XML tree, which can be read/written only by knowing the file's symmetric key.
+            
+            SecureXml is useful, when an application needs to have different configurations for different customers, but the application itself
+            should stay the same. It can also act like a license file, or along with a settings.xml file, can load/save user-modifiable values as settings.
+            
+            It supports invisible Node trees and TreeView-based Node trees.
+            
+            Two Node types exist:
+            		- Data Nodes: Contain data, cannot have sub-nodes. (Mimics file)
+            		- Folder Nodes: Data is null, can have sub-nodes. (Mimics folder)
+            
+            		- Node Path should be specified, like: "AppName\\Modules\\Inspector".
+            		- Example use of this namespace is in Streamline app.
+            		- Use 'SecureXmlEditor' to edit encrypted XML files.
+            \authors   Zsolt Pataki
+            \version   1.0
+            \date      2015
+            \remarks	Completeness: OK
+            \remarks	Robustness: Partial
+            \remarks	Documentation: Partial
+            <summary>Provides info for custom value editors.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.ValueEditor.ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.ValueEditor.EditorType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.ValueEditor.ButtonLabel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.ValueEditor.Header">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.ValueEditor.Filter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.ValueEditor.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.ValueEditor.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="editorType"></param>
+            <param name="buttonLabel"></param>
+            <param name="header"></param>
+            <param name="filter"></param>
+        </member>
+        <member name="T:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting">
+            <summary>
+            Stores modifiable parameters (called 'Settings') temporarly. Settings can be saved to and loaded from XML file.
+            </summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.VarName">
+            <summary>Name of Setting.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.Value">
+            <summary>Value of Setting.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.Min">
+            <summary>Minimum value of Setting.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.Max">
+            <summary>Maximum value of Setting.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.Digits">
+            <summary>Number of digits for floats and doubles.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.Suffix">
+            <summary>Suffix.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.FName">
+            <summary>Friendly name of Setting, which can be shown for the user.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.Visible">
+            <summary>This Setting should be visible for the user or not.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.Editable">
+            <summary>This Setting should be editable by the user or not.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.EntryType">
+            <summary>Entry type of System.String value.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.DefaultValue">
+            <summary>Default value of Setting in case user wants to reset Value.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.ValueOptions">
+            <summary>List of possible Values the user can choose from.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.ValueOptionsPathNode">
+            <summary>If possible Values should be coming from folder names, the folder names under this path will be enumerated as possible Values.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.RequiresRestart">
+            <summary>Whether changing Value requires to restart (more of a reloading) the app, or not.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.RequiresFullRestart">
+            <summary>Whether changing Value requires the app to be completely restarted.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.Editors">
+            <summary>Name of Editor of setting's value (Optional).</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.Order">
+            <summary>When multiple settings need to be in a specific order, set this other than -1.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlSetting.QuickHelp">
+            <summary>Quick help for Setting, which can be shown for the user.</summary>
+        </member>
+        <member name="T:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2">
+            	\brief		Represents a single Node with name and data object.
+            	\authors	Zsolt Pataki
+            	\version	1.0
+            	\date		2015
+            	\remarks	Completeness: OK
+            	\remarks	Robustness: OK
+            	\remarks	Documentation: OK
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.Name">
+            <summary>Name of Node.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.Data">
+            <summary>Data object of Node.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.Nodes">
+            <summary>Sub-Nodes of Node.</summary>
+        </member>
+        <member name="F:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.Parent">
+            <summary>Parent Node of Node.</summary>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.#ctor">
+            <summary>Default constructor. Name = "", Data = null, Nodes = new HashVar, Parent = null.</summary>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.#ctor(System.String,System.Object,TDI.Streamline.Utilities.SecureXml.SecureXmlNode2)">
+            <summary>Constructor.</summary>
+            <param name="name">Name of Node.</param>
+            <param name="data">Data, stored on Node. Set to null, if this is a Folder Node.</param>
+            <param name="parent">Parent Node of Node.</param>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetFolderNodes(System.String,System.Boolean)">
+            <summary>Gets Folder Nodes from path, relative to this Folder Node.</summary>
+            <param name="path">Path to list Folder Nodes from, relative to this Folder Node.</param>
+            <param name="sort">If 'true', Folder Nodes sorted by their Names.</param>
+            <returns>SecureXmlNode array with Folder Nodes on desired path, or null, if path not found or path points to a Data Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetNodes(System.String,System.Boolean)">
+            <summary>Gets an array of sub-nodes on path.</summary>
+            <param name="path">Path of folder node, which's sub-nodes are returned.</param>
+            <param name="sort">If True, nodes are sorted by name.</param>
+            <returns>Returns array of sub-nodes. Returns null, if node is not a folder node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetCustomOrderedFolderNodes(System.String)">
+            <summary>Gets Folder Nodes from path, relative to this Folder Node and sorts nodes by sub-node '(int)Order'. 'Order' should be set if index of that node doesn't matter. Items with order # of -1 or less are the first ones, after ordered items.</summary>
+            <param name="path">Path to list Folder Nodes from, relative to this Folder Node.</param>
+            <returns>SecureXmlNode array with Folder Nodes on desired path, or null, if path not found or path points to a Data Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetFolderNodes(System.Boolean)">
+            <summary>Gets Folder Nodes from path, relative to this Folder Node.</summary>
+            <param name="sort">If true, Folder Nodes sorted by their Names.</param>
+            <returns>SecureXmlNode array with Folder Nodes of this Folder Node, or null if path not found or this is not a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetDataNodes(System.String,System.Boolean)">
+            <summary>Gets Data Nodes from path, relative to this Folder Node.</summary>
+            <param name="path">Path to list Data Nodes from, relative to this Folder Node.</param>
+            <param name="sort">If true, Data Nodes sorted by their Names.</param>
+            <returns>SecureXmlNode array with Data Nodes on desired path, or null, if path not found or path points to Data Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetDataNodes(System.Boolean)">
+            <summary>Gets Data Nodes on this Folder Node.</summary>
+            <param name="sort">If true, Data Nodes sorted by their Names.</param>
+            <returns>SecureXmlNode array with Data Nodes on this Folder Node, or null if this is not a Folder node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetFolderNames(System.String,System.Boolean)">
+            <summary>Gets Folder Nodes' names from path, relative to this Folder Node.</summary>
+            <param name="path">Path to list the Folder Nodes' names from, relative to this Folder Node.</param>
+            <param name="sort">If true, Folder Node names sorted alphabetically.</param>
+            <returns>String array with Folder Nodes' names, or null if path not found or this Node is not a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetFolderNames(System.Boolean)">
+            <summary>Gets Folder Nodes' names right under this Folder Node.</summary>
+            <param name="sort">If true, Folder Nodes' names sorted.</param>
+            <returns>String array with Folder Nodes' names, or null if path not found or this Node is not a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetDataNames(System.String,System.Boolean)">
+            <summary>Gets Data Nodes' names right under this Folder Node.</summary>
+            <param name="path">Path to list the Data Nodes' names from, relative to this Folder Node.</param>
+            <param name="sort">If 'true', Data Node names are sorted alphabetically.</param>
+            <returns>String array with Data Nodes' names below desired path, or null if path not found or this Node is not a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetDataNames(System.Boolean)">
+            <summary>Gets Data Nodes' names under this Folder Node.</summary>
+            <param name="sort">If true, Data Nodes' names sorted alphabetically.</param>
+            <returns>String array with Data Nodes' names of this Folder Node, or null if path not found or this Node is not a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetRootNode">
+            <summary>Gets the Root Node of this Node.</summary>
+            <returns>Root Node of this Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetNode(System.String)">
+            <summary>Gets Data node or Folder Node from path, relative to this Folder Node.</summary>
+            <param name="path">Path of requested Node, relative to this Folder Node.</param>
+            <returns>The requested Node or null if Node not found on path.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetDataAsMemoryStream(System.String)">
+            <summary>Returns Node's Data as MemoryStream.</summary>
+            <param name="path">Path to Data Node, relative to this Node.</param>
+            <returns>Data as MemoryStream, or null, if Node not found on path.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetDataArrayItemAsMemoryStream(System.String,System.Int32)">
+            <summary>Get one item from Data array, as MemoryStream.</summary>
+            <param name="path">Path to Data Node, relative to this Node.</param>
+            <param name="index">Index of requested Data, in Data array.</param>
+            <returns>Data as MemoryStream, or null, if Node not found.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetData(System.String)">
+            <summary>Gets Data of Data Node from path, relative to this Folder Node.</summary>
+            <param name="path">Path to Data Node, relative to this Node.</param>
+            <returns>The Data Node's Data or null, if Node not found or it is a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.LoadSetting(System.String,TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.Boolean)">
+            <summary>Loads Setting from path specified.</summary>
+            <param name="path">Path to Setting, relative to this Node.</param>
+            <param name="settingsRoot">Root Node, where the settings are stored. for this Node in the same path, as defined in 'path'.</param>
+            <param name="sortOptions">If True, Setting's options will be sorted alphabetically.</param>
+            <returns>The Setting object or null, if Node not found.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.LoadSetting(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.Boolean)">
+            <summary>Get Setting of this Node.</summary>
+            <param name="settingsRoot">Root Node of Settings, which store the Setting in the same path as this Node's root Node.</param>
+            <param name="sortOptions">If true, Setting's options will be sorted alphabetically.</param>
+            <returns>The Setting. Null, if not found or this Node is not a Data Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.SaveSetting(System.String,TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.Object)">
+            <summary>Saves Setting into Settings Node tree.</summary>
+            <param name="path">Relative path from this Node to the Node of which current value should be saved.</param>
+            <param name="settingsRoot">Root of Settings.</param>
+            <param name="newValue">Value to save.</param>
+            <returns>FailNullReference, if Node not found or path does not point to Data Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.SaveSetting(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.Object)">
+            <summary>Saves value for this Node.</summary>
+            <param name="settingsRoot">Root of Settings where Value should be saved.</param>
+            <param name="newValue">New Value of this Node.</param>
+            <returns>Ok, if it went well, or error.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetFullPath(System.String)">
+            <summary>Get absolute path of Node, which is on a relative path to this Node.</summary>
+            <param name="path">Path to relative Node.</param>
+            <returns>Absolute path of Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.CreateFolder(System.String)">
+            <summary>Creates a Folder Node for this Folder Node.</summary>
+            <param name="path">Path, relative to this Node, where the new Folder Node should be created.</param>
+            <returns>The created Folder Node, if path is empty</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.CreateFolder(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.String)">
+            <summary>Creates a Folder Node on specified Folder Node.</summary>
+            <param name="rootFolderNode">Folder Node, on where the new Folder Node should be created.</param>
+            <param name="path">Absolute path on rootFolderNode, where the new Folder Node should be created. Multiple levels can be provided.</param>
+            <returns>The created Folder Node, or null if path is empty.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.CreateNode(System.String,System.Object)">
+            <summary>Creates a Data Node for this Folder Node.</summary>
+            <param name="path">Path, relative to this Node, where the new Data Node should be created.</param>
+            <param name="data">Data for new Node.</param>
+            <returns>The created Folder Node, or null, if this Node is not a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.CreateNode(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.String,System.Object)">
+            <summary>Creates a Data Node on specified Folder Node.</summary>
+            <param name="rootFolderNode">Folder Node, on where the new Data Node should be created.</param>
+            <param name="path">Absolute path on rootFolderNode, where the new Data Node should be created. Multiple levels can be provided.</param>
+            <param name="data">Data for new Node.</param>
+            <returns>The created Data Node, or null if path is empty or rootFolderNode is not a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.CreateDataNode(System.Windows.Forms.TreeView,System.Windows.Forms.TreeNode,System.String,System.Object,System.Drawing.Font)">
+            <summary>Creates Data Node on TreeView.</summary>
+            <param name="tv">TreeView holding the Nodes.</param>
+            <param name="tn">TreeNode</param>
+            <param name="name">Name of new Node.</param>
+            <param name="data">Data of new Node. Null, if Folder Node.</param>
+            <param name="font">Font to use to display entry on TreeView.</param>
+            <returns>The created TreeNode.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.CreateFolderNode(System.Windows.Forms.TreeView,System.Windows.Forms.TreeNode,System.String,System.Drawing.Font)">
+            <summary>Creates Folder Node on TreeView.</summary>
+            <param name="tv">TreeView holding the Nodes.</param>
+            <param name="tn">TreeNode</param>
+            <param name="name">Name of new Node.</param>
+            <param name="font">Font to use to display entry on TreeView.</param>
+            <returns>The created TreeNode.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetFolderNodes(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.Boolean)">
+            <summary>Gets all Folder Nodes on Folder Node.</summary>
+            <param name="rootNode">Folder Node on which the Folder Nodes should be enumerated.</param>
+            <param name="sort">True if array should be sorted alphabetically.</param>
+            <returns>Array of Folder Nodes, or null if rootNode is not a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetNodes(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.Boolean)">
+            <summary>Gets all Folder Nodes on Folder Node.</summary>
+            <param name="rootNode">Folder Node on which the Folder Nodes should be enumerated.</param>
+            <param name="sort">True if array should be sorted alphabetically.</param>
+            <returns>Array of Folder Nodes, or null if rootNode is not a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetDataNodes(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.Boolean)">
+            <summary>Gets all Data Nodes on Folder Node.</summary>
+            <param name="rootNode">Folder Node on which the Data Nodes should be enumerated.</param>
+            <param name="sort">True if array should be sorted alphabetically.</param>
+            <returns>Array of Data Nodes, or null if rootNode is not a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetFolderNames(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.Boolean)">
+            <summary>Gets all Folder Nodes' names on Folder Node.</summary>
+            <param name="rootNode">Folder Node on which the Folder Nodes' names should be enumerated.</param>
+            <param name="sort">True if array should be sorted alphabetically.</param>
+            <returns>Array of Folder Nodes' names, or null if rootNode is not a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetDataNames(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.Boolean)">
+            <summary>Gets all Data Nodes' names on Folder Node.</summary>
+            <param name="rootNode">Folder Node on which the Data Nodes' names should be enumerated.</param>
+            <param name="sort">True if array should be sorted alphabetically.</param>
+            <returns>Array of Data Nodes' names, or null if rootNode is not a Folder Node.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetNode(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.String)">
+            <summary>Gets Folder or Data Node from Data Node on path.</summary>
+            <param name="rootNode">Root Folder Node.</param>
+            <param name="path">Path, relative to Root Folder Node.</param>
+            <returns>Node, or null if Node not found.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetNode(System.Windows.Forms.TreeNodeCollection,System.String)">
+            <summary>Gets TreeNode from specified path.</summary>
+            <param name="path">Path of desired TreeNode.</param>
+            <param name="rootNode">Path is expressed relative to this Node.</param>
+            <returns>TreeNode on specified path.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.GetData(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.String)">
+            <summary>Gets Data of Data Node on path.</summary>
+            <param name="rootNode">Root Folder Node.</param>
+            <param name="path">Path, relative to Root Folder Node.</param>
+            <returns>Data, or null if Data Node not found.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.FindNodeByname(TDI.Streamline.Utilities.Publishing.GenericDictionary,System.String)">
+            <summary>Finds Node by name.</summary>
+            <param name="nodes">Search for Node between these Nodes.</param>
+            <param name="name">Name of Node to be found.</param>
+            <returns>The Node found, null otherwise.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.FindNodeByName(System.Windows.Forms.TreeNodeCollection,System.String)">
+            <summary>Finds Node by name.</summary>
+            <param name="nodes">Search for Node between these Nodes.</param>
+            <param name="name">Name of Node to be found.</param>
+            <returns>The Node found, null otherwise.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlNode2.Compare(System.Object,System.Object)">
+            <summary>
+            Compares two nodes based on the name
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TDI.Streamline.Utilities.SecureXml.SecureXmlReader2">
+            	\brief     Loads SecureXml file into SecureXmlNode (Secure DAT or Plain XML).
+            	\authors   Zsolt Pataki
+            	\version   1.0
+            	\date      2015
+            	\remarks	Completeness: OK
+            	\remarks	Robustness: OK
+            	\remarks	Documentation: OK
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlReader2.LoadFromXml(System.String,System.Windows.Forms.TreeView,System.Drawing.Font,System.Drawing.Font)">
+            <summary>Loads XML file into TreeView.</summary>
+            <param name="path">Full path to XML file to load.</param>
+            <param name="tv">TreeView instance, which will be populated with XML file's content.</param>
+            <returns>True, if operation has been successful.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlReader2.LoadFromXml(System.String,TDI.Streamline.Utilities.SecureXml.SecureXmlNode2)">
+            <summary>Loads XML file into SecureXmlNode.</summary>
+            <param name="path">Full path to XML file to load.</param>
+            <param name="rootNode">SecureXmlNode instance, which will be populated with XML file's content.</param>
+            <returns>True, if operation has been successful.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlReader2.LoadFromDat(System.String,System.Windows.Forms.TreeView,System.Byte[],System.Byte[],System.Drawing.Font,System.Drawing.Font)">
+            <summary>Loads encrypted Secure XML file into TreeView.</summary>
+            <param name="path">Full path to Secure XML file to load.</param>
+            <param name="tv">TreeView instance, which will be populated with XML file's content.</param>
+            <param name="key">64-bit DES key.</param>
+            <param name="iv">64-bit Initialization Vector.</param>
+            <returns>True, if operation has been successful.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlReader2.LoadFromDat(System.String,TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.Byte[],System.Byte[])">
+            <summary>Loads encrypted Secure XML file into SecureXmlNode.</summary>
+            <param name="path">Full path to Secure XML file to load.</param>
+            <param name="rootNode">SecureXmlNode instance, which will be populated with XML file's content.</param>
+            <param name="key">64-bit DES key.</param>
+            <param name="iv">64-bit Initialization Vector.</param>
+            <returns>True, if operation has been successful.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlReader2.ProcessNode(System.Xml.XmlTextReader,TDI.Streamline.Utilities.SecureXml.SecureXmlNode2)">
+            <summary>Loads Nodes of Node recursively.</summary>
+            <param name="reader">The main file reader object.</param>
+            <param name="rootNode">Node on which the sub Nodes should be loaded.</param>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlReader2.ProcessNode(System.Xml.XmlTextReader,System.Windows.Forms.TreeView,System.Windows.Forms.TreeNode,System.Drawing.Font,System.Drawing.Font)">
+            <summary>Loads Nodes of Node recursively.</summary>
+            <param name="reader">the main file reader object.</param>
+            <param name="tv">The TreeView where Nodes are stored after loading.</param>
+            <param name="node">Node on which the sub Nodes should be loaded.</param>
+        </member>
+        <member name="T:TDI.Streamline.Utilities.SecureXml.SecureXmlWriterDat2">
+            	\brief		Saves SecureXml tree into DAT (Secure XML) file.
+            	\warning	Never include this DLL in non-packed, public apps
+            	\authors	Zsolt Pataki
+            	\version	1.0
+            	\date		2015
+            	\remarks	Completeness: OK
+            	\remarks	Robustness: OK
+            	\remarks	Documentation: OK
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlWriterDat2.SaveToDat(System.Windows.Forms.TreeView,System.String,System.Byte[],System.Byte[])">
+            <summary>Saves Node tree of TreeView into Secure XML.</summary>
+            <param name="tv">TreeView to save.</param>
+            <param name="path">Full path to destination file.</param>
+            <param name="key">64-bit DES key.</param>
+            <param name="iv">64-bit Initialization Vector.</param>
+            <returns>True, if file has been saved.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlWriterDat2.SaveToDat(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.String,System.Byte[],System.Byte[])">
+            <summary>Saves Node tree of SecureXmlNode into Secure XML.</summary>
+            <param name="rootNode">Root Node to save.</param>
+            <param name="path">Full path to destination file.</param>
+            <param name="key">64-bit DES key.</param>
+            <param name="iv">64-bit Initialization Vector.</param>
+            <returns>True, if file has been saved.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlWriterDat2.SaveNode(System.Xml.XmlTextWriter,TDI.Streamline.Utilities.Publishing.ExtendedControls.TreeNode)">
+            <summary>Saves one Node to DAT file.</summary>
+            <param name="xtw">Object to save Node to.</param>
+            <param name="tn">Node to Save.</param>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlWriterDat2.SaveNode(System.Xml.XmlTextWriter,TDI.Streamline.Utilities.SecureXml.SecureXmlNode2)">
+            <summary>Saves one Node to DAT file.</summary>
+            <param name="xtw">Object to save Node to.</param>
+            <param name="rn">Node to Save.</param>
+        </member>
+        <member name="T:TDI.Streamline.Utilities.SecureXml.SecureXmlWriterXml2">
+            	\brief		Saves SecureXml tree into plain XML.
+            	\authors	Zsolt Pataki
+            	\version	1.0
+            	\date		2015
+            	\remarks	Completeness: OK
+            	\remarks	Robustness: OK
+            	\remarks	Documentation: OK
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlWriterXml2.SaveToXml(System.Windows.Forms.TreeView,System.String)">
+            <summary>Saves Node tree of TreeView into Plain XML.</summary>
+            <param name="tv">TreeView to save.</param>
+            <param name="path">Full path to destination file.</param>
+            <returns>True, if file has been saved.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlWriterXml2.SaveToXml(TDI.Streamline.Utilities.SecureXml.SecureXmlNode2,System.String)">
+            <summary>Saves Node tree of TreeView into Plain XML.</summary>
+            <param name="rootNode">Root Node to save.</param>
+            <param name="path">Full path to destination file.</param>
+            <returns>True, if file has been saved.</returns>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlWriterXml2.SaveNode(System.Xml.XmlTextWriter,TDI.Streamline.Utilities.Publishing.ExtendedControls.TreeNode)">
+            <summary>Saves one Node to XML file.</summary>
+            <param name="xtw">Object to save Node to.</param>
+            <param name="tn">Node to Save.</param>
+        </member>
+        <member name="M:TDI.Streamline.Utilities.SecureXml.SecureXmlWriterXml2.SaveNode(System.Xml.XmlTextWriter,TDI.Streamline.Utilities.SecureXml.SecureXmlNode2)">
+            <summary>Saves one Node to XML file.</summary>
+            <param name="xtw">Object to save Node to.</param>
+            <param name="rn">Node to Save.</param>
+        </member>
+    </members>
+</doc>
